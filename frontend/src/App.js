@@ -73,12 +73,15 @@ export default function App() {
 
   useEffect(() => {
     loadComponents().catch(() => {});
-    loadProjects().then((list) => {
-      const last = localStorage.getItem("stl-last-project");
-      const target = list.find((p) => p.id === last) || list[0];
-      if (target) openProject(target.id);
-    });
-  }, [loadProjects, loadComponents, openProject]);
+    loadProjects();
+  }, [loadProjects, loadComponents]);
+
+  const goHome = () => {
+    setProject(null);
+    setMessages([]);
+    setPoints([]);
+    setPickMode(false);
+  };
 
   const current = useMemo(
     () => project?.versions?.find((v) => v.id === project.current_version_id) || project?.versions?.[project.versions.length - 1],
@@ -177,9 +180,11 @@ export default function App() {
           <button className="icon-btn" onClick={() => setSidebar(!sidebar)} data-testid="toggle-sidebar-btn" title="Projets">
             {sidebar ? <PanelLeftClose size={17} /> : <PanelLeftOpen size={17} />}
           </button>
-          <div className="logo"><Box size={17} /></div>
-          <span className="brand-name">Atelier STL</span>
-          <span className="brand-tag">IA</span>
+          <button className="brand-home" onClick={goHome} title="Accueil" data-testid="home-btn">
+            <div className="logo"><Box size={17} /></div>
+            <span className="brand-name">Atelier STL</span>
+            <span className="brand-tag">IA</span>
+          </button>
         </div>
         <div className="topbar-center">
           {project &&

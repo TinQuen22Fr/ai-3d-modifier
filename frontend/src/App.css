@@ -45,6 +45,8 @@ body {
   padding: 0 14px; background: var(--panel); border-bottom: 1px solid var(--border);
 }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 220px; }
+.brand-home { display: flex; align-items: center; gap: 10px; background: none; border: none; color: var(--text); font: inherit; cursor: pointer; padding: 4px 6px; border-radius: 8px; }
+.brand-home:hover { background: var(--panel-2); }
 .logo {
   width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center;
   background: var(--accent); color: #1a0d03;
